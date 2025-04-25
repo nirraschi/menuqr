@@ -1,0 +1,20 @@
+# Ignorar node_modules
+node_modules/
+
+# Ignorar archivos de entorno (sensibles)
+.env
+.env.local
+
+# Ignorar logs y carpetas de compilación
+npm-debug.log*
+dist/
+build/
+
+# Next.js
+.next/
+out/          # Si usas 'next export' (carpeta de salida estática)
+
+
+# Sistemas operativos
+.DS_Store  # macOS
+Thumbs.db  # Windows
