@@ -16,7 +16,7 @@ export default function RestaurantsList() {
     return (
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Restaurantes</h1>
-            <Link href="/admin/restaurants/create" className="text-blue-600 underline mb-4 block">+ Crear nuevo restaurante</Link>
+            <Link href="/app/admin/restaurants/create" className="text-blue-600 underline mb-4 block">+ Crear nuevo restaurante</Link>
             <table className="w-full border-collapse border border-gray-300">
                 <thead>
                     <tr className="bg-gray-100">
@@ -32,7 +32,7 @@ export default function RestaurantsList() {
                             <td className="border p-2">{r.name}</td>
                             <td className="border p-2">{r.description}</td>
                             <td className="border p-2">
-                                <Link href={`/admin/restaurants/${r.id}`} className="text-blue-500 underline">Editar</Link>
+                                <Link href={`/app/admin/restaurants/${r.id}`} className="text-blue-500 underline">Editar</Link>
                             </td>
                         </tr>
                     ))}

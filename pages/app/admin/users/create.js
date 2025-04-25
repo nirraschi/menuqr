@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 export default function CreateUserPage() {
     const [form, setForm] = useState({
-        email: '',
+        mail: '',
         password: '',
         phone: '',
         role: 'user',
@@ -14,6 +14,7 @@ export default function CreateUserPage() {
     const [restaurants, setRestaurants] = useState([])
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState('')
+    const router = useRouter()
 
     //obtener restaaurantes para asignar
     useEffect(() => {
@@ -48,7 +49,7 @@ export default function CreateUserPage() {
                 setMessage('Usuario creado con éxito.')
 
                 setForm({
-                    email: '',
+                    mail: '',
                     password: '',
                     phone: '',
                     role: 'user',
@@ -64,6 +65,7 @@ export default function CreateUserPage() {
         finally {
             setLoading(false)
         }
+        router.push('/app/admin/users')
     }
 
     return (
@@ -74,9 +76,9 @@ export default function CreateUserPage() {
                 <input
                     className="w-full p-2 border rounded"
                     type="email"
-                    name="email"
+                    name="mail"
                     placeholder="Email"
-                    value={form.email}
+                    value={form.mail}
                     onChange={handleChange}
                     required
                 />

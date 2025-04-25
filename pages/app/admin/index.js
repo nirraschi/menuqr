@@ -1,4 +1,3 @@
-// pages/index.js
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
@@ -7,8 +6,7 @@ export default function Home() {
 
     useEffect(() => {
         // Simulamos que el usuario ya está autenticado
-        // Redirigimos a /app/start (Inicio)
-        router.replace('/app/start')
+        router.replace('/app/admin/restaurants')
     }, [])
 
     return null

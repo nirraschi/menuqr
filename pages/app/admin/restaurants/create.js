@@ -1,7 +1,7 @@
 // pages/admin/restaurants/create.js
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { supabase } from '@/utils/supabaseClient'
+import { supabase } from '@/lib/supabaseClient'
 
 const CreateRestaurant = () => {
     const router = useRouter()
@@ -24,7 +24,7 @@ const CreateRestaurant = () => {
             console.error('Error al crear el restaurante:', error)
             return
         }
-        router.push('/admin/restaurants')
+        router.push('/app/admin/restaurants')
     }
 
     return (

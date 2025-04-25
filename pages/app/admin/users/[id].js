@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { supabase as supabaseClient } from '@/utils/supabaseClient'
-import { supabase as supabaseAdmin } from '@/utils/supabaseAdmin'
+import { supabase as supabaseClient } from '@/lib/supabaseClient'
+import { supabase as supabaseAdmin } from '@/lib/supabaseAdmin'
 
 
 const EditUser = ({ user, restaurants }) => {
@@ -52,7 +52,7 @@ const EditUser = ({ user, restaurants }) => {
             return
         }
 
-        router.push('/admin/users') // Redirigir a la lista de usuarios
+        router.push('/app/admin/users') // Redirigir a la lista de usuarios
     }
 
     return (
