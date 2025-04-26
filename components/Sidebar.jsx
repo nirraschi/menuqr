@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
-import { House, Pencil, Settings, LogOut, ShieldUser  } from 'lucide-react'
+import { House, Pencil, Settings, LogOut, ShieldUser, ChevronRight } from 'lucide-react'
 
 export default function Sidebar() {
     const router = useRouter()
@@ -10,6 +10,7 @@ export default function Sidebar() {
     //const [role, setRole] = useState(null)
     const [restaurants, setRestaurants] = useState([])
     const [selectedRestaurant, setSelectedRestaurant] = useState(null)
+    const [adminOpen, setAdminOpen] = useState(false)
 
     const role = 'admin'; // TODO: get role from supabase
 
@@ -56,14 +57,11 @@ export default function Sidebar() {
     }
 
     const menu = [
-        { href: '/app/start', label: 'Inicio', icon: <House className="w-5 h-5 mr-4 text-red-400"/>  },
-        { href: '/app/menu', label: 'Editar menú', icon: <Pencil className="w-5 h-5 mr-4 text-red-400"/> },
-        { href: '/app/settings', label: 'Configurar', icon: <Settings className="w-5 h-5 mr-4 text-red-400"/> },
+        { href: '/app/start', label: 'Inicio', icon: <House className="w-5 h-5 mr-4 text-red-400" /> },
+        { href: '/app/menu', label: 'Editar menú', icon: <Pencil className="w-5 h-5 mr-4 text-red-400" /> },
+        { href: '/app/settings', label: 'Configurar', icon: <Settings className="w-5 h-5 mr-4 text-red-400" /> },
     ]
 
-    if (role === 'admin') {
-        menu.push({ href: '/app/admin', label: 'Administrar', icon: <ShieldUser className="w-5 h-5 mr-4 text-red-400"/> })
-    }
 
     return (
         <aside className="w-64 bg-gray-800 text-white p-4 flex flex-col justify-between min-h-screen">
@@ -71,7 +69,7 @@ export default function Sidebar() {
                 <h2 className="text-xl font-bold mb-4">Mi Menú</h2>
                 <nav className="space-y-2">
                     {menu.map((item) => (
-                        
+
                         <Link
                             key={item.href}
                             href={item.href}
@@ -82,6 +80,25 @@ export default function Sidebar() {
                             {item.label}
                         </Link>
                     ))}
+
+                    {role === 'admin' && (
+                        <div>
+                            <button
+                                onClick={() => setAdminOpen(!adminOpen)}
+                                className="flex items-center justify-start p-2 rounded hover:bg-gray-700 w-full"
+                            >
+                                <ShieldUser className="w-5 h-5 mr-4 text-red-400" />
+                                Administrar
+                                <ChevronRight className={`w-5 h-5 ml-2 text-gray-400 ${adminOpen ? 'rotate-90' : ''}`} />
+                            </button>
+                            {adminOpen && (
+                                <div className="ml-8 mt-1 space-y-1 text-sm">
+                                    <Link href="/app/admin/restaurants" className='flex items-center justify-start p-2 rounded hover:bg-gray-700'>Restaurantes</Link>
+                                    <Link href="/app/admin/users" className='flex items-center justify-start p-2 rounded hover:bg-gray-700'>Usuarios</Link>
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </nav>
             </div>
 

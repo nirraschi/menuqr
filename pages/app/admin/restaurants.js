@@ -22,7 +22,8 @@ export default function RestaurantsList() {
                     <tr className="bg-gray-100">
                         <th className="border p-2">Nombre</th>
                         <th className="border p-2">Descripción</th>
-                        <th className="border p-2">Usuario</th>
+                        <th className="border p-2">Dirección</th>
+                        <th className="border p-2">Acciones</th>
 
                     </tr>
                 </thead>
@@ -31,6 +32,7 @@ export default function RestaurantsList() {
                         <tr key={r.id}>
                             <td className="border p-2">{r.name}</td>
                             <td className="border p-2">{r.description}</td>
+                            <td className="border p-2">{r.address}</td>
                             <td className="border p-2">
                                 <Link href={`/app/admin/restaurants/${r.id}`} className="text-blue-500 underline">Editar</Link>
                             </td>
