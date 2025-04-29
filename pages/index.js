@@ -3,13 +3,10 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 export default function Home() {
-    const router = useRouter()
+    return (
+        <div>
+            <h1>Home Page</h1>
+        </div>
+    )
 
-    useEffect(() => {
-        // Simulamos que el usuario ya está autenticado
-        // Redirigimos a /app/start (Inicio)
-        router.replace('/app/start')
-    }, [])
-
-    return null
 }

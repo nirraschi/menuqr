@@ -1,6 +1,6 @@
 // pages/admin/restaurants/create.js
 import { useState } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabaseClient'
 
 const CreateRestaurant = () => {

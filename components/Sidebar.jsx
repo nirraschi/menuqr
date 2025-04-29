@@ -1,44 +1,22 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
 import { House, Pencil, Settings, LogOut, ShieldUser, ChevronRight } from 'lucide-react'
 
+import { useUserStore } from '@/store/userStore'
+
 export default function Sidebar() {
     const router = useRouter()
-    //const [user, setUser] = useState(null)
-    //const [role, setRole] = useState(null)
+    const { user } = useUserStore()
     const [restaurants, setRestaurants] = useState([])
     const [selectedRestaurant, setSelectedRestaurant] = useState(null)
     const [adminOpen, setAdminOpen] = useState(false)
 
-    const role = 'admin'; // TODO: get role from supabase
-
-    // useEffect(() => {
-    //     const getSessionData = async () => {
-    //         const { data: { session } } = await supabase.auth.getSession()
-    //         const userData = session?.user
-    //         setUser(userData)
-
-    //         // Acá podrías sacar el rol del usuario desde metadata o DB
-    //         const { data, error } = await supabase
-    //             .from('users')
-    //             .select('role, restaurant_id, restaurants(id, name)')
-    //             .eq('id', userData.id)
-    //             .single()
-
-    //         if (!error) {
-    //             setRole(data.role)
-    //             setSelectedRestaurant(data.restaurants)
-    //         }
-    //     }
-
-    //     getSessionData()
-    // }, [])
+    const role = user?.role
 
     useEffect(() => {
         if (role === 'admin') {
-            // Si sos admin, trae todos los restaurantes
             const fetchRestaurants = async () => {
                 const { data, error } = await supabase
                     .from('restaurants')
@@ -67,6 +45,9 @@ export default function Sidebar() {
         <aside className="w-64 bg-gray-800 text-white p-4 flex flex-col justify-between min-h-screen">
             <div>
                 <h2 className="text-xl font-bold mb-4">Mi Menú</h2>
+                {role === 'admin' && <p>{user.email}</p>}
+                <p>{role}</p>
+
                 <nav className="space-y-2">
                     {menu.map((item) => (
 
@@ -126,7 +107,8 @@ export default function Sidebar() {
                 <button
                     onClick={async () => {
                         await supabase.auth.signOut()
-                        router.push('/')
+                        useUserStore.getState().logout()
+                        router.push('/login')
                     }}
                     className="mt-4 w-full bg-red-500 hover:bg-red-600 p-2 rounded text-sm flex items-center justify-start gap-2"
                 >
